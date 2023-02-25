@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'Nintendo DS BIOS';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Nintendo DS BIOS'), url('https://fonts.cdnfonts.com/s/64809/NintendoDSBIOS.woff') format('woff');
+}
+
+:root {
+  font-family: 'Nintendo DS BIOS', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  background-color: rgb(24, 24, 27);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  display: flex;
+}
+
+#app {
+  height: 100vh;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.pixelated {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
