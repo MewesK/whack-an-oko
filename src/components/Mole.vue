@@ -1,16 +1,67 @@
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
+  props: {
+    active: {
+      type: Boolean,
+      required: true,
+    },
+  },
   data() {
     return {
-      hit: false,
+      hit: true,
+      timeoutId: 0,
     };
   },
+  mounted() {
+    this.activate();
+  },
+  watch: {
+    active(newValue: Boolean, oldValue: Boolean) { 
+      if (!oldValue && newValue) { 
+        this.activate();
+      }
+      if (oldValue && !newValue) {
+        this.hit = true;
+      }
+    }
+  },
   methods: {
+    activate() {
+      if (!this.active) { 
+        return;
+      }
+
+      setTimeout(() => {
+        if (!this.active) { 
+          return;
+        }
+
+        this.hit = false;
+        this.timeoutId = setTimeout(() => {
+          if (!this.active) { 
+            return;
+          }
+
+          if (!this.hit) {
+            this.hit = true;
+            this.$emit('missed');
+          }
+        }, (Math.random() * 1.2 + 0.8) * 1000);
+      }, (Math.random() * 5 + 1) * 1000)
+    },
     onClick() {
-      this.hit = true;
-      this.$emit('bonk');
+      if (!this.active) { 
+        return;
+      }
+
+      if (!this.hit) {
+        this.hit = true;
+        clearTimeout(this.timeoutId);
+        this.$emit('bonk');
+        this.activate();
+      }
     }
   }
 });

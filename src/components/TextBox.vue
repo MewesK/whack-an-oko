@@ -28,6 +28,7 @@ export default defineComponent({
   watch: {
     pages(value: Array<string>) {
       if (value && value.length > 0) {
+        this.currentPage = 0;
         this.show = !!value;
       }
     }
